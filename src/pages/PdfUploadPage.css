@@ -1,40 +1,136 @@
 /* PdfUploadPage.css */
 
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.logo {
+  position: absolute;
+  top: 4vh;
+  left: 4vw;
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 40px;
+}
+
 .pdf-upload-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .pdf-upload-title {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .pdf-upload-input {
-    margin-bottom: 20px;
-  }
-  
-  .pdf-navigation {
-    margin-top: 20px;
-  }
-  
-  .pdf-navigation p {
-    font-size: 16px;
-    margin-bottom: 10px;
-  }
-  
-  .pdf-navigation button {
-    margin: 5px;
-    padding: 10px 15px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .pdf-navigation button:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  justify-content: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.pdf-upload-title {
+  font-size: 36px;
+  margin-top: 20px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.pdf-upload-input {
+  margin-bottom: 20px;
+}
+
+.pdf-navigation {
+  margin-top: 20px;
+}
+
+.pdf-navigation p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.pdf-navigation button {
+  margin: 5px;
+  width: 150px;
+  padding: 10px 0px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: rgb(45, 43, 43);
+  color: white;
+  border-radius: 24px;
+}
+
+.pdf-navigation button:disabled {
+  display: none;
+}
+
+.continue {
+  background-color: rgb(33, 37, 43);
+  color: white;
+  padding: 15px 50px;
+  border: none;
+  border-radius: 20px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 15px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.continue:hover {
+  opacity: 0.8;
+}
+
+.react-pdf__Page__textContent,
+.react-pdf__Page__annotations {
+  display: none;
+}
+
+/* PdfUploadPage.css */
+
+.upload-container {
+  position: relative;
+  display: inline-block;
+  transition: all 0.3s;
+}
+
+.upload-icon {
+  width: 20vw; /* Adjust size as needed */
+  height: 20vw; /* Adjust size as needed */
+  cursor: pointer;
+  opacity: 1;
+}
+.upload-container:hover {
+  opacity: 0.8;
+}
+
+.file-upload-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Hide the file input text and button */
+.file-upload-input::-webkit-file-upload-button {
+  display: none;
+}
+.file-upload-input::before {
+  content: ""; /* No content */
+  display: inline-block;
+  width: 100%; /* Full width of the container */
+  height: 100%; /* Full height of the container */
+}
+
+.react-pdf__Page__canvas {
+  height: 50vh;
+}
+
+.react-pdf__Page__canvas {
+  width: 30vw !important;
+  height: auto !important;
+}
