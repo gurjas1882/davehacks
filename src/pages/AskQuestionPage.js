@@ -1,14 +1,31 @@
-import React, { useContext } from 'react';
-import { AppContext } from '../contexts/AppContext';
+import React, { useContext } from "react";
+import { AppContext } from "../contexts/AppContext";
 import "./AskQuestionPage.css";
-import openai from 'openai'; // Import openai module
+import { OpenAI } from "openai";
+import { useNavigate } from "react-router-dom";
+
 
 function AskQuestionPage() {
-  const { extractedText, question, setQuestion, answer, setAnswer, loading, setLoading } = useContext(AppContext);
+  
+  const navigate = useNavigate();
+  const {
+    extractedText,
+    question,
+    setQuestion,
+    answer,
+    setAnswer,
+    loading,
+    setLoading,
+  } = useContext(AppContext);
 
   const handleAskQuestion = async () => {
-    if (!extractedText) return;
+    if (!extractedText || !question) return;
     setLoading(true);
+
+    const openai = new OpenAI({
+      apiKey: "sk-proj-2oY1EBNzj01BmQfQrUDoT3BlbkFJWuDdP2aVH7v9ET9d7U70",
+      dangerouslyAllowBrowser: true,
+    });
 
     try {
       const completion = await openai.chat.completions.create({
@@ -21,32 +38,38 @@ function AskQuestionPage() {
           },
         ],
       });
-      const questions = completion.choices[0].message.content.split('\n').filter(Boolean);
-      setQuestion(questions[0]); // Assuming you want to set the first generated question as the user's question
-    } catch (error) {
-      console.error('Error generating questions:', error);
+      const questions = completion.choices[0].message.content
+        .split("\n")
+        .filter(Boolean);
+      setAnswer(questions);
     } finally {
       setLoading(false);
     }
   };
 
+
   return (
-    <div className='questionContainer'>
-      <h1 className="logo">studybuddy</h1>
-      <h1>Ask a Question</h1>
-      <input
-        type="text"
-        placeholder="Ask a question..."
-        value={question}
-        onChange={(e) => setQuestion(e.target.value)}
-      />
-      <button onClick={handleAskQuestion} disabled={loading}>
-        {loading ? 'Loading...' : 'Ask'}
-      </button>
+    <div className="questionContainer">
+      <h1 className="logo" onClick={() => navigate('/choice')}>studybuddy</h1>
+
+      <h1 className="askTitle">ask a question</h1>
+      <h5 className="askSubtitle">get any question about your notes answered instantly</h5>
+      <div>
+        <input
+          type="text"
+          placeholder="Type a question..."
+          value={question}
+          onChange={(e) => setQuestion(e.target.value)}
+          className="input"
+        />
+        <button onClick={handleAskQuestion} disabled={loading} className="inputSubmit">
+          {loading ? "Loading..." : "Ask"}
+        </button>
+      </div>
       {answer && (
         <div>
-          <h3>Answer:</h3>
-          <p>{answer}</p>
+          <h3 className="answerTitle">Answer:</h3>
+          <p className="answer">{answer}</p>
         </div>
       )}
     </div>

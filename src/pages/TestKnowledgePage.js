@@ -7,9 +7,11 @@ import "./TestKnowledgePage.css";
 
 import recording from '../assets/recording.svg';
 import stopRecord from '../assets/paused.svg';
+import { useNavigate } from 'react-router-dom';
 
 
 function TestKnowledgePage() {
+  const navigate = useNavigate();
   const {
     extractedText,
     generatedQuestions,
@@ -192,7 +194,7 @@ function TestKnowledgePage() {
   return (
     <div className='testContainer'>
       <div className='leftContainer'>
-      <h1 className="logo">studybuddy</h1>
+      <h1 className="logo" onClick={() => navigate('/choice')}>studybuddy</h1>
       <h1 className='testTitle'>Test Your Knowledge</h1>
       <h5 className='testSubtitle'>record yourself answering these questions and receive feedback</h5>
       {generatedQuestions.length > 0 && (
