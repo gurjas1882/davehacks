@@ -83,18 +83,18 @@ function PdfUploadPage() {
             disabled={pageNumber <= 1}
             onClick={() => setPageNumber(pageNumber - 1)}
           >
-            Previous
+            Last Page
           </button>
           <button
             type="button"
             disabled={pageNumber >= numPages}
             onClick={() => setPageNumber(pageNumber + 1)}
           >
-            Next
+            Next Page
           </button>
         </div>
       )}
-      {numPages && <button onClick={handleNext} className="continue">continue</button>}
+      {numPages && <button onClick={handleNext} className="continue">Continue</button>}
     </div>
   );
 }

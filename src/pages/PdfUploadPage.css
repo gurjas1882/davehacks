@@ -49,22 +49,24 @@
   margin-bottom: 10px;
 }
 
+
 .pdf-navigation button {
-  margin: 5px;
-  width: 150px;
-  padding: 10px 0px;
-  font-size: 16px;
-  cursor: pointer;
-  background-color: rgb(45, 43, 43);
-  color: white;
-  border-radius: 24px;
+    margin: 5px;
+    height: 15px;
+    font-size: 11px;
+    cursor: pointer;
+    /* background-color: white; */
+    color: black;
+    text-align-last: auto;
 }
+
 
 .pdf-navigation button:disabled {
   display: none;
 }
 
 .continue {
+  margin-top: 70px;
   background-color: rgb(33, 37, 43);
   color: white;
   padding: 15px 50px;
