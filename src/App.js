@@ -15,6 +15,8 @@ function App() {
     <Route path="/" element={<PdfUploadPage />} />
     <Route path="/choice" element={<QuestionChoicePage />} />
     <Route path="/test" element={<TestKnowledgePage />} />
+    <Route path="/ask-question" element={<AskQuestionPage />} />
+
   </Routes>
 </Router>
     </AppProvider>

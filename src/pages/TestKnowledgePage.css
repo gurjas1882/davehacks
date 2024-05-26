@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.logo {
+  position: absolute;
+  top: 4vh;
+  left: 4vw;
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 40px;
+}
+
+.testContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    margin-left: 4vw;
+}
+
+.leftContainer {
+    width: 50%;
+}
+
+.leftContainer button { 
+    margin: 5px;
+  width: 200px;
+  padding: 10px 0px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: rgb(45, 43, 43);
+  color: white;
+  border-radius: 24px;
+  margin-top: 50px;
+}
+
+.question {
+    margin-top: 50px;
+    font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 30px;
+}
+
+.rightContainer {
+    width: 50%;
+    text-align: center;
+    margin-left: 4vw;
+}
+
+.rightContainer button {
+    background-color: transparent;
+    color: transparent;
+    border: none;
+    transition: all 0.3s;
+}
+
+.rightContainer button:hover {
+    opacity: 0.6;
+}
+
+.testTitle {
+    font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 46px;
+}
+
+.testSubtitle {
+    font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 30px;
+}

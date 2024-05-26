@@ -1,41 +1,38 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../contexts/AppContext';
+import "./AskQuestionPage.css";
+import openai from 'openai'; // Import openai module
 
 function AskQuestionPage() {
   const { extractedText, question, setQuestion, answer, setAnswer, loading, setLoading } = useContext(AppContext);
 
   const handleAskQuestion = async () => {
-    if (!extractedText || !question) return;
+    if (!extractedText) return;
     setLoading(true);
 
     try {
-      const response = await fetch('https://api.openai.com/v1/engines/davinci-codex/completions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer YOUR_OPENAI_API_KEY`
-        },
-        body: JSON.stringify({
-          prompt: `Context: ${extractedText}\nQuestion: ${question}\nAnswer:`,
-          max_tokens: 150,
-          n: 1,
-          stop: null,
-          temperature: 0.7,
-        })
+      const completion = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo",
+        messages: [
+          { role: "system", content: "You are a helpful assistant." },
+          {
+            role: "user",
+            content: `Context: ${extractedText}\nQuestion: ${question}\nAnswer:`,
+          },
+        ],
       });
-
-      const data = await response.json();
-      setAnswer(data.choices[0].text.trim());
+      const questions = completion.choices[0].message.content.split('\n').filter(Boolean);
+      setQuestion(questions[0]); // Assuming you want to set the first generated question as the user's question
     } catch (error) {
-      console.error('Error asking question:', error);
-      setAnswer('Error getting answer. Please try again.');
+      console.error('Error generating questions:', error);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div>
+    <div className='questionContainer'>
+      <h1 className="logo">studybuddy</h1>
       <h1>Ask a Question</h1>
       <input
         type="text"

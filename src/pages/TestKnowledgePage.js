@@ -3,6 +3,11 @@ import { AppContext } from '../contexts/AppContext';
 import MicRecorder from 'mic-recorder-to-mp3';
 import { OpenAI } from 'openai';
 import axios from 'axios';
+import "./TestKnowledgePage.css";
+
+import recording from '../assets/recording.svg';
+import stopRecord from '../assets/paused.svg';
+
 
 function TestKnowledgePage() {
   const {
@@ -185,23 +190,14 @@ function TestKnowledgePage() {
   }
 
   return (
-    <div>
-      <h1>Test Your Knowledge</h1>
+    <div className='testContainer'>
+      <div className='leftContainer'>
+      <h1 className="logo">studybuddy</h1>
+      <h1 className='testTitle'>test you knowledge</h1>
+      <h5 className='testSubtitle'>record yourself answering these questions and receive feedback</h5>
       {generatedQuestions.length > 0 && (
         <div>
-          <h3>Question {currentQuestionIndex + 1}:</h3>
-          <p>{generatedQuestions[currentQuestionIndex]}</p>
-          <button onClick={startRecording} disabled={isRecording}>
-            Record
-          </button>
-          <button onClick={stopRecording} disabled={!isRecording}>
-            Stop
-          </button>
-          {recordedAudio && (
-            <div>
-              <audio src={URL.createObjectURL(recordedAudio)} controls />
-            </div>
-          )}
+          <p className='question'>{generatedQuestions[currentQuestionIndex]}</p>
           {feedback && (
             <div>
               <h4>Feedback:</h4>
@@ -216,6 +212,19 @@ function TestKnowledgePage() {
           </button>
         </div>
       )}
+      </div>
+      <div className='rightContainer'>
+      {isRecording ? (
+  <button onClick={stopRecording} disabled={!isRecording}>
+    <img src={recording} alt="Stop Recording" />
+  </button>
+) : (
+  <button onClick={startRecording} disabled={isRecording}>
+    <img src={stopRecord} alt="Start Recording" />
+  </button>
+)}
+
+      </div>
     </div>
   );
 }

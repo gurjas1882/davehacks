@@ -7,11 +7,12 @@ function QuestionChoicePage() {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className='optionsContainer'>
       <h1 className="logo">studybuddy</h1>
-      <h1>Choose Action</h1>
-      <button onClick={() => navigate('/ask-question')}>Ask a Question</button>
-      <button onClick={() => navigate('/test')}>Test Your Knowledge</button>
+      <h1 className='optionsTitle'>what would you like to do today?</h1>
+      <div>
+      <button className="optionQuestion" onClick={() => navigate('/ask-question')}>Ask a Question</button>
+      <button className='optionTest' onClick={() => navigate('/test')}>Test Your Knowledge</button></div>
     </div>
   );
 }
