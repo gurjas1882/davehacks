@@ -53,9 +53,10 @@ cursor: pointer;
 
 .pdf-navigation button {
     margin: 5px;
-    height: 15px;
-    font-size: 11px;
-    cursor: pointer;
+    height: 20px;
+    font-size: 14px;
+    padding-left: 4px;
+    padding-right: 4px;
     /* background-color: white; */
     color: black;
     text-align-last: auto;
