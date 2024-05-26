@@ -1,19 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../contexts/AppContext';
-import { pdfjs } from 'react-pdf';
-import { Document, Page } from 'react-pdf';
+import { Document, Page, pdfjs } from 'react-pdf';
+import './PdfUploadPage.css';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-function PdfUpload() {
-  const { setSelectedFile, setExtractedText } = useContext(AppContext);
+function PdfUploadPage() {
+  const { setSelectedFile, setExtractedText, selectedFile, extractedText } = useContext(AppContext);
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
-
-  const handleFileChange = (event) => {
+  const navigate = useNavigate();
+  
+  const handleFileChange = async (event) => {
     const file = event.target.files[0];
     if (file && file.type === 'application/pdf') {
       setSelectedFile(file);
+
       const reader = new FileReader();
       reader.onload = async (e) => {
         try {
@@ -26,6 +29,7 @@ function PdfUpload() {
             extractedText += textContent.items.map(item => item.str).join(' ');
           }
           setExtractedText(extractedText);
+          setNumPages(totalPages); // Set the numPages here
         } catch (error) {
           console.error('Error parsing PDF:', error);
         }
@@ -38,11 +42,21 @@ function PdfUpload() {
     setNumPages(numPages);
   };
 
+  const handleNext = () => {
+    navigate('/choice');
+  };
+
   return (
-    <div>
-      <input type="file" accept=".pdf" onChange={handleFileChange} />
+    <div className="pdf-upload-page">
+      <h1 className="pdf-upload-title">Upload PDF</h1>
+
+      {/* Conditionally render the file input */}
+      {!numPages && (
+        <input className="pdf-upload-input" type="file" accept=".pdf" onChange={handleFileChange} />
+      )}
+
       {numPages && (
-        <div>
+        <div className="pdf-navigation">
           <p>Page {pageNumber} of {numPages}</p>
           <Document file={selectedFile} onLoadSuccess={onDocumentLoadSuccess}>
             <Page pageNumber={pageNumber} />
@@ -63,8 +77,11 @@ function PdfUpload() {
           </button>
         </div>
       )}
+      {numPages && ( // Show "Next" button only when PDF is loaded
+        <button onClick={handleNext}>Next</button>
+      )}
     </div>
   );
 }
 
-export default PdfUpload;
+export default PdfUploadPage;
