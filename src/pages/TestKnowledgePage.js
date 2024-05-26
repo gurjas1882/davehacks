@@ -29,8 +29,8 @@ function TestKnowledgePage() {
   } = useContext(AppContext);
 
   const recorder = useRef(null);
-  const openaiApiKey = 'sk-proj-2oY1EBNzj01BmQfQrUDoT3BlbkFJWuDdP2aVH7v9ET9d7U70';
-  const googleApiKey = 'AIzaSyCRtBybZoz00ovnRotQvLVTfZAgOjt2aUY';
+  const openaiApiKey = '';
+  const googleApiKey = '';
 
   useEffect(() => {
     recorder.current = new MicRecorder({ bitRate: 128 });

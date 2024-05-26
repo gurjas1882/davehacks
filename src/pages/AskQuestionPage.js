@@ -23,7 +23,7 @@ function AskQuestionPage() {
     setLoading(true);
 
     const openai = new OpenAI({
-      apiKey: "sk-proj-2oY1EBNzj01BmQfQrUDoT3BlbkFJWuDdP2aVH7v9ET9d7U70",
+      apiKey: "",
       dangerouslyAllowBrowser: true,
     });
 
